@@ -44,16 +44,15 @@ $(function () {
 
 # Import tools and set create variables
 from sage.plot.plot3d.shapes import *
-var('theta phi')
+var('theta phi c')
 
-@interact(layout = [ ['a11', 'a12'], ['a21', 'a22'], ['a31', 'a32'], ['show_together'] ])
+@interact(layout = [ ['a11', 'a12'], ['a21', 'a22'], ['a31', 'a32'] ])
 def SVD_viewer( a11 = input_box( default = 1, label = "matrix A", width = 5), 
         a12 = input_box( default = 2, label = "", width = 5), 
         a21 = input_box( default = 2, label = "       ", width = 5), 
         a22 = input_box( default = 3, label = "", width = 5), 
         a31 = input_box( default = 3, label = "       ", width = 5), 
-        a32 = input_box( default = 1, label = "", width = 5), 
-        show_together = False ):
+        a32 = input_box( default = 1, label = "", width = 5) ):
             
     # Set up A, calculated the SVD, and assign U, D, and V
     A = matrix(RDF, [ [a11, a12], [a21, a22], [a31, a32] ])
@@ -61,17 +60,11 @@ def SVD_viewer( a11 = input_box( default = 1, label = "matrix A", width = 5),
     U = svd[0]
     D = svd[1]
     V = svd[2]
-    
-    print svd
-    print V.H[0]
-    print A*V.H[0]
 
     # Set up the unit sphere and the transformed figure
     S = circle( (0,0), 1 )
-#    T = parametric_plot3d(A*vector((sin(theta)*cos(phi),sin(theta)*sin(phi),cos(theta))),
-#            (theta,0,2*pi),(phi,0,pi),opacity=.5)
-    T = arrow3d( (0,0,0), (1,0,0) )
-     
+    T = parametric_plot3d( A * vector( (cos(theta), sin(theta)) ),
+            (theta, 0, 2*pi), opacity=.5)
         
     # Add vectors to the plots of S and T
     arrowCols = ['red','green','blue']
@@ -86,6 +79,6 @@ def SVD_viewer( a11 = input_box( default = 1, label = "matrix A", width = 5),
 </div>
 
 <hr>
-Last modified on July 13th, 2017.
+Last modified on July 25th, 2017.
 </body>
 </html>
