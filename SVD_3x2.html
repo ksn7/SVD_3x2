@@ -42,6 +42,8 @@ $(function () {
 <div class="compute">
 <script type="text/x-sage">
 
+################################################### 3 X 2 VERSION #############################################################
+
 # Import tools and set create variables
 from sage.plot.plot3d.shapes import *
 var('theta phi c')
@@ -72,6 +74,16 @@ def SVD_viewer( a11 = input_box( default = 1, label = "matrix A", width = 5),
         S += arrow((0,0), V.H[j], color=arrowCols[j])
         T += arrow3d((0,0,0), D[j,j]*U.H[j], color=arrowCols[j])
     
+    ((x_min, y_min, z_min), (x_max, y_max, z_max)) = T.bounding_box()
+    x_axis = parametric_plot( (x, 0, 0), (x_min, x_max), color = 'orange', thickness = 1, 
+        aspect_ratio = 'automatic' )
+    y_axis = parametric_plot( (0, x, 0), (y_min, y_max), color = '#66b3ff', thickness = 1, 
+        aspect_ratio = 'automatic' )
+    z_axis = parametric_plot( (0, 0, x), (z_min, z_max), color = '#eb99ff', thickness = 1, 
+        aspect_ratio = 'automatic' )
+        
+    T += x_axis + y_axis + z_axis
+    
     show(S)
     show(T)
 
@@ -79,6 +91,6 @@ def SVD_viewer( a11 = input_box( default = 1, label = "matrix A", width = 5),
 </div>
 
 <hr>
-Last modified on July 25th, 2017.
+Last modified on July 28th, 2017.
 </body>
 </html>
