@@ -68,7 +68,7 @@ def SVD_viewer( a11 = input_box( default = 1, label = "matrix A", width = 5),
     # Set up the unit sphere and the transformed figure
     S = circle( (0,0), 1 )
     T = parametric_plot3d( A * vector( (cos(theta), sin(theta)) ),
-            (theta, 0, 2*pi), opacity=.5)
+            (theta, 0, 2*pi), thickness = 2)
         
     # Add vectors to the plots of S and T
     arrowCols = ['red','green','blue']
@@ -86,13 +86,13 @@ def SVD_viewer( a11 = input_box( default = 1, label = "matrix A", width = 5),
         
     T += x_axis + y_axis + z_axis
     
-    show(S)
-    show(T)
+    S.show()
+    T.show()
 
 </script>
 </div>
 
 <hr>
-Last modified on July 28th, 2017.
+Last modified on August 17th, 2017.
 </body>
 </html>
